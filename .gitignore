@@ -1,0 +1,9 @@
+.vscode/
+Env/
+dist
+build
+__pycache__
+*.pyc
+.cache
+.idea
+movies.spec
