@@ -2,7 +2,7 @@
 
 ## 展示
 
-![image-20220203161946160](https://cdn.jsdelivr.net/gh/Winniekun/cloudImg@master/uPic/image-20220203161946160.png)
+![二维码生成器](https://cdn.jsdelivr.net/gh/Winniekun/cloudImg@master/uPic/image-20220203172034568.png)
 
 
 

@@ -28,16 +28,10 @@ class MyWindow(QMainWindow, Ui_Dialog):
         print("生成密钥信息: ", self.secret_key)
         self._bind_qrcode_generator_button()
         # 图片的一些优化
-        self.scene = QtWidgets.QGraphicsScene(self)
-        self.item = ""
-        # self.encrypt_pic.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)  # 改变对齐方式
-        # self.unEncrypt_pic.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)  # 改变对齐方式
-        # self.encrypt_pic.setSceneRect(0, 0, self.graphicsView.viewport().width(),
-        #                               self.graphicsView.height())  # 设置图形场景大小和图形视图大小一致
-        # self.unEncrypt_pic.setSceneRect(0, 0, self.graphicsView.viewport().width(),
-        #                                 self.graphicsView.height())  # 设置图形场景大小和图形视图大小一致
-        # self.addScenes()  # 调用绘制图形的方法
-        # self.scene.mousePressEvent = self.mousePressEvent  # 接管图形场景的鼠标事件
+        self.en_scene = QtWidgets.QGraphicsScene(self)
+        self.un_scene = QtWidgets.QGraphicsScene(self)
+        self.en_item = ""
+        self.un_item = ""
 
     # 绑定数据类型
     def _bind_data_type(self):
@@ -110,9 +104,9 @@ class MyWindow(QMainWindow, Ui_Dialog):
         expire_time = self.expireTimeInput.toPlainText()
         ciper = domain_name + SPLITTER + token + SPLITTER + expire_time
         print("所有密文信息: ", ciper)
-        ciper_msg = cryptogram_utils.aes_encrypt(self.secret_key, ciper)
-        self.ciperAfterOutput.setPlainText(ciper_msg)
-        return ciper_msg
+        # ciper_msg = cryptogram_utils.aes_encrypt(self.secret_key, ciper)
+        # self.ciperAfterOutput.setPlainText(ciper_msg)
+        return ciper
 
     def _bind_ciper_msg(self):
         """
@@ -143,6 +137,7 @@ class MyWindow(QMainWindow, Ui_Dialog):
         :return:
         """
         msg = self._gen_msg()
+        # bjtt-niocloud-charging.nioxyz
         ciper_msg = self._gen_ciper_msg()
         all_msg = msg + SPLITTER + ciper_msg
         self.ciperBeforeOutput.setPlainText(all_msg)
@@ -158,9 +153,9 @@ class MyWindow(QMainWindow, Ui_Dialog):
 
         frame = QImage(img, new_width, new_height, QImage.Format_RGB888)
         pix = QPixmap.fromImage(frame)
-        self.item = QGraphicsPixmapItem(pix)
-        self.scene.addItem(self.item)
-        self.encrypt_pic.setScene(self.scene)
+        self.en_item = QGraphicsPixmapItem(pix)
+        self.en_scene.addItem(self.en_item)
+        self.encrypt_pic.setScene(self.en_scene)
 
     def show_unencrypt_selected_image(self, image_path):
         image = cv2.imread(image_path)
@@ -173,9 +168,29 @@ class MyWindow(QMainWindow, Ui_Dialog):
 
         frame = QImage(img, new_width, new_height, QImage.Format_RGB888)
         pix = QPixmap.fromImage(frame)
-        self.item = QGraphicsPixmapItem(pix)
-        self.scene.addItem(self.item)
-        self.unEncrypt_pic.setScene(self.scene)
+        self.un_item = QGraphicsPixmapItem(pix)
+        self.un_scene.addItem(self.un_item)
+        self.unEncrypt_pic.setScene(self.un_scene)
+
+    def utf16to8(self, input_txt: str) -> str:
+        """
+        转码 解决中文无法转码问题
+        :return:
+        """
+        out = []
+        for idx in range(len(input_txt)):
+            ch = ord(input_txt[idx])
+            if 0x0001 <= ch <= 0x007f:
+                out.append(input_txt[idx])
+            elif ch > 0x07ff:
+                out.append(chr(0xE0 | (ch >> 12 & 0x0F)))
+                out.append(chr(0x80 | (ch >> 6 & 0x3F)))
+                out.append(chr(0x80 | (ch >> 0 & 0x3F)))
+            else:
+                out.append(chr(0xC0 | (ch >> 6) & 0x1f))
+                out.append(chr(0x80 | (ch >> 0) & 0x3f))
+
+        return ''.join(out)
 
     def _generate_qrcode(self, encrypt):
         """
@@ -188,7 +203,7 @@ class MyWindow(QMainWindow, Ui_Dialog):
         if not encrypt:
             print("未加密的数据: ", self.total_data)
             version, level, qr_name = amzqr.run(
-                self.total_data,
+                self.utf16to8(self.total_data),
                 version=1,
                 level=error_level,
                 picture=None,
@@ -202,7 +217,7 @@ class MyWindow(QMainWindow, Ui_Dialog):
         else:
             print("加密的数据 ", self.encrypt_data)
             version, level, qr_name = amzqr.run(
-                self.encrypt_data,
+                self.utf16to8(self.encrypt_data),
                 version=1,
                 level=error_level,
                 picture=None,
@@ -226,6 +241,7 @@ class MyWindow(QMainWindow, Ui_Dialog):
 
         self._bind_ciper_msg()
         self._bind_ciper_before_msg()
+        self._bind_ciper_after_msg()
         self._bind_secret_key_ciper()
         self._bind_sha512()
 

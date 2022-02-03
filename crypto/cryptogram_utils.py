@@ -4,9 +4,18 @@ import random
 import hashlib
 
 BLOCK_SIZE = 16  # Bytes
-pad = lambda s: s + (BLOCK_SIZE - len(s) % BLOCK_SIZE) * \
-                chr(BLOCK_SIZE - len(s) % BLOCK_SIZE)
-unpad = lambda s: s[:-ord(s[len(s) - 1:])]
+
+unpad = lambda date: date[0:-ord(date[len(date) - 1:])]
+
+
+def pad(text):
+    """
+    #填充函数，使被加密数据的字节码长度是block_size的整数倍
+    """
+    count = len(text.encode('utf-8'))
+    add = BLOCK_SIZE - (count % BLOCK_SIZE)
+    entext = text + (chr(add) * add)
+    return entext
 
 
 def aes_encrypt(key, data):
