@@ -47,7 +47,7 @@ def aes_decrypt(key, data):
 
 def gen_secret_key(key_len):
     # 1、先指定字符集，字符集中包括数字、大小写字母、特殊符号：
-    seed = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+=-"
+    seed = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
     # 2、从指定的字符集中随机取，分别取8位，组合成新字符串
     str1 = []
     for i in range(key_len):
@@ -68,6 +68,9 @@ def sha512(value):
     m.update(value.encode('utf-8'))
     return m.hexdigest()
 
+
 if __name__ == '__main__':
-    tmp = sha512("123113")
-    print(tmp)
+    key = gen_secret_key(16)
+    data = 'cGdVHMqI/lw6Nj7gahM5gH4xlpaQ33bzUeQEcWbA3j3ZC02Ek92HAnwtgWUSTzibrUOurAMD9BY17k+x3PDwOA=='
+    endata = aes_encrypt(key, data)
+    print(endata)

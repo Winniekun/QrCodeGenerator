@@ -12,17 +12,19 @@ from pyqt5_plugins.examplebutton import QtWidgets
 from crypto import cryptogram_utils
 
 from windows.QRCodeWindows import QRCodeAESWindow
-from windows.QRCODE import QRCODE
+from windows.qrcodeGenerator import Ui_Dialog
 
 SPLITTER = "+++"
 
 
-class MyWindow(QMainWindow, QRCODE):
+class MyWindow(QMainWindow, Ui_Dialog):
     def __init__(self, parent=None):
         super(MyWindow, self).__init__()
         self.setupUi(self)
         # 避免频发更新 设置类的全局变量
         self.secret_key = cryptogram_utils.gen_secret_key(16)
+        self.encrypt_data = ""
+        self.total_data = ""
         print("生成密钥信息: ", self.secret_key)
         self._bind_qrcode_generator_button()
         # 图片的一些优化
@@ -131,6 +133,8 @@ class MyWindow(QMainWindow, QRCODE):
         ciper_msg = self._gen_ciper_msg()
         all_msg = msg + SPLITTER + ciper_msg
         encrypt_data = cryptogram_utils.aes_encrypt(self.secret_key, all_msg)
+        self.total_data = all_msg
+        self.encrypt_data = encrypt_data
         self.ciperAfterOutput.setPlainText(encrypt_data)
 
     def _bind_ciper_before_msg(self):
@@ -180,11 +184,11 @@ class MyWindow(QMainWindow, QRCODE):
         """
         error_level = self.errorLevelComboBoxInput.currentText()
         size = self.sizeInput.value()
-        all_msg = self._gen_msg() + SPLITTER + self._gen_ciper_msg()
 
         if not encrypt:
+            print("未加密的数据: ", self.total_data)
             version, level, qr_name = amzqr.run(
-                all_msg,
+                self.total_data,
                 version=1,
                 level=error_level,
                 picture=None,
@@ -196,9 +200,9 @@ class MyWindow(QMainWindow, QRCODE):
             )
             return qr_name
         else:
-            encrypt_data = cryptogram_utils.aes_encrypt(self.secret_key, all_msg)
+            print("加密的数据 ", self.encrypt_data)
             version, level, qr_name = amzqr.run(
-                encrypt_data,
+                self.encrypt_data,
                 version=1,
                 level=error_level,
                 picture=None,

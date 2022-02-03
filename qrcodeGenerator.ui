@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1251</width>
+    <height>1022</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1251</width>
+    <height>882</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>14</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_3">
+   <item row="0" column="0">
+    <widget class="QFrame" name="data_layout">
+     <property name="minimumSize">
+      <size>
+       <width>1233</width>
+       <height>864</height>
+      </size>
+     </property>
+     <layout class="QVBoxLayout" name="total_layout">
+      <item>
+       <layout class="QHBoxLayout" name="combine_setting_desc_layout">
+        <item>
+         <widget class="QGroupBox" name="qrcodeSetting">
+          <property name="title">
+           <string>二维码参数设置</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QLineEdit" name="dataTypeName">
+             <property name="text">
+              <string>数据类型：</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="dataTypeComboxInput">
+             <item>
+              <property name="text">
+               <string>String</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Byte</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Integer</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Double</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Array</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="errorLevelName">
+             <property name="text">
+              <string>纠错等级：</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="errorLevelComboBoxInput">
+             <item>
+              <property name="text">
+               <string>L</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>M</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Q</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>H</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="versionName">
+             <property name="text">
+              <string>版本：</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSpinBox" name="versionInput"/>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="sizeName">
+             <property name="text">
+              <string>大小：</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSpinBox" name="sizeInput"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="main_info_layout">
+        <item>
+         <layout class="QVBoxLayout" name="qrcode_layout">
+          <item>
+           <widget class="QGroupBox" name="encodeGroup">
+            <property name="title">
+             <string>加密的二维码</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_2">
+             <item row="0" column="0">
+              <widget class="QGraphicsView" name="encrypt_pic"/>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="unEncodeGroup">
+            <property name="title">
+             <string>未加密的二维码</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout">
+             <item row="0" column="0">
+              <widget class="QGraphicsView" name="unEncrypt_pic"/>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="right_layout">
+          <item>
+           <layout class="QVBoxLayout" name="button_layout">
+            <item>
+             <widget class="QGroupBox" name="button_list_group">
+              <property name="title">
+               <string>按钮列表</string>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <item>
+                <widget class="QPushButton" name="qrcodeGenButton">
+                 <property name="text">
+                  <string>二维码生成</string>
+                 </property>
+                 <property name="checkable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="qrcodeRecogButton">
+                 <property name="text">
+                  <string>二维码识别</string>
+                 </property>
+                 <property name="checkable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="openButton">
+                 <property name="text">
+                  <string>打开</string>
+                 </property>
+                 <property name="checkable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="saveButton">
+                 <property name="text">
+                  <string>保存</string>
+                 </property>
+                 <property name="checkable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="clearButton">
+                 <property name="text">
+                  <string>清除</string>
+                 </property>
+                 <property name="checkable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="total_base_info_layout">
+            <item>
+             <widget class="QGroupBox" name="plaintextGroup">
+              <property name="title">
+               <string>明文信息</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_4">
+               <item row="0" column="0">
+                <layout class="QVBoxLayout" name="base_info_layout">
+                 <item>
+                  <layout class="QHBoxLayout" name="base_inner_layout_first">
+                   <item>
+                    <widget class="QLabel" name="addressName">
+                     <property name="text">
+                      <string>地址：</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPlainTextEdit" name="addressInput"/>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="base_inner_layout_thrird">
+                   <item>
+                    <widget class="QLabel" name="onlineTimeName">
+                     <property name="text">
+                      <string>上线时间：</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPlainTextEdit" name="onlineTimeInput"/>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="base_inner_layout_second">
+                   <item>
+                    <widget class="QLabel" name="deviceTypeName">
+                     <property name="text">
+                      <string>设备类型：</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPlainTextEdit" name="deviceTypeInput"/>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="base_inner_layout_fourth">
+                   <item>
+                    <widget class="QLabel" name="chargeNumberName">
+                     <property name="text">
+                      <string>设备编号：</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPlainTextEdit" name="deviceNameInput"/>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="cipherGroup">
+              <property name="title">
+               <string>密文信息</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_5">
+               <item row="0" column="0">
+                <layout class="QHBoxLayout" name="ciper_base_info_first">
+                 <item>
+                  <widget class="QLabel" name="seveiceDomainName">
+                   <property name="text">
+                    <string>服务中心域名：</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPlainTextEdit" name="seveiceDomainInput"/>
+                 </item>
+                </layout>
+               </item>
+               <item row="1" column="0">
+                <layout class="QHBoxLayout" name="ciper_base_info_second">
+                 <item>
+                  <widget class="QLabel" name="tokenName">
+                   <property name="text">
+                    <string>授权码：</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPlainTextEdit" name="tokenInput"/>
+                 </item>
+                </layout>
+               </item>
+               <item row="2" column="0">
+                <layout class="QHBoxLayout" name="ciper_base_info_third">
+                 <item>
+                  <widget class="QLabel" name="expireTimeName">
+                   <property name="text">
+                    <string>过期时间：</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPlainTextEdit" name="expireTimeInput"/>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="outputContentGoup">
+            <property name="title">
+             <string>输出内容</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_12">
+             <item>
+              <layout class="QHBoxLayout" name="ciper_info_layout">
+               <item>
+                <widget class="QLabel" name="ciperContentResultName">
+                 <property name="text">
+                  <string>密文信息加密结果：</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPlainTextEdit" name="ciperContentResultOutput"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="combine_key_sha512_layout">
+               <item>
+                <layout class="QVBoxLayout" name="sha512_layout">
+                 <item>
+                  <layout class="QHBoxLayout" name="output_sha512_layout">
+                   <item>
+                    <widget class="QLabel" name="sha512Name">
+                     <property name="text">
+                      <string>SHA512：</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPlainTextEdit" name="sha512NameOutput"/>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="output_sha512_isok_layout">
+                   <item>
+                    <widget class="QLabel" name="sha512OKName">
+                     <property name="lineWidth">
+                      <number>1</number>
+                     </property>
+                     <property name="text">
+                      <string>SHA512校验是否成功：</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPlainTextEdit" name="sha512OKOutput"/>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="secret_key_layout">
+                 <item>
+                  <layout class="QHBoxLayout" name="output_key_layout">
+                   <item>
+                    <widget class="QLabel" name="randomKeyName">
+                     <property name="text">
+                      <string>随机密钥：</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPlainTextEdit" name="randomKeyOutput"/>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="output_ciper_key_layout">
+                   <item>
+                    <widget class="QLabel" name="randomKeyCiperName">
+                     <property name="text">
+                      <string>随机密钥密文：</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPlainTextEdit" name="randomKeyCiperOutput"/>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="all_data_layout">
+               <item>
+                <layout class="QHBoxLayout" name="output_ciper_before_layout">
+                 <item>
+                  <widget class="QLabel" name="ciperBeforeName">
+                   <property name="text">
+                    <string>加密之前数据内容：</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPlainTextEdit" name="ciperBeforeOutput"/>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="output_ciper_after_layout">
+                 <item>
+                  <widget class="QLabel" name="ciperAfterName">
+                   <property name="text">
+                    <string>加密之后数据内容：</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPlainTextEdit" name="ciperAfterOutput"/>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
